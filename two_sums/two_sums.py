@@ -16,6 +16,8 @@ from time import time
 from typing import List, TypeVar, Tuple, Callable
 import unittest as ut
 
+
+ONE_TENTHS_SECOND = 0.1
 QUARTER_SECOND = 0.25
 HALF_SECOND = 0.5
 ONE_SECOND = 1
@@ -47,8 +49,10 @@ def time_algorithm(f: Callable,
 
 
 def determine_n_runs(time: float) -> int:
-    if time <= QUARTER_SECOND:
-        return 1000
+    if time <= ONE_TENTHS_SECOND:
+        return 10_000
+    elif time <= QUARTER_SECOND:
+        return 1_000
     elif time <= HALF_SECOND:
         return 100
     else:
