@@ -74,7 +74,7 @@ def measure_performance_x_runs(f):
                 f" target = {args[0].target} stats:")
         else:
             print(f"{f.__name__} with nums = {args[0].nums}"
-                  f"and target = {args[0].target} stats:")
+                  f" and target = {args[0].target} stats:")
         print(f"Total time for {n_runs} run(s): {time}")
         print(f"Total memory for one run: {mem}\n")
         return result
