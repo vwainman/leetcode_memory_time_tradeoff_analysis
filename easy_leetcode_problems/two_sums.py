@@ -101,7 +101,8 @@ class TwoSumSolutions:
 
     @measure_performance_x_runs
     def two_sum_brute_force(self) -> List[int]:
-        # O(n^2) solution
+        # Time: O(n^2)
+        # Space: O(1)
         for i, num1 in enumerate(self.nums):
             for j, num2 in enumerate(self.nums[i+1:]):
                 if num1 + num2 == self.target:
@@ -109,7 +110,8 @@ class TwoSumSolutions:
 
     @measure_performance_x_runs
     def two_sum_mapped_nums(self) -> List[int]:
-        # O(n) solution
+        # Time: O(n)
+        # Space: O(n)
         """Mapping the difference between the target and numbers
            encountered provides us with the information necessary
            to know which valid number(s) to look for next"""
