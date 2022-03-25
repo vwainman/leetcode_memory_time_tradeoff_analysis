@@ -9,7 +9,8 @@ except the number 0 itself.
 Constraints:
 - The number of nodes in each linked list is in the range [1, 100].
 - 0 <= Node.val <= 9
-- It is guaranteed that the list represents a number that does not have leading zeros.
+- It is guaranteed that the list represents a number that does not
+have leading zeros.
 """
 
 from __future__ import annotations
@@ -64,24 +65,23 @@ class AddTwoNumbersSolution:
         self.l2 = l2
 
     @staticmethod
-    def get_linked_vals(linked_list: Optional[ListNode]) -> list:
+    def get_linked_vals(node: Optional[ListNode]) -> list:
         num_list: list = []
-        end_of_list = False
-        while not end_of_list:
-            num_list.append(linked_list.val)
-            if linked_list.next is None:
-                end_of_list = True
-            else:
-                linked_list = linked_list.next
+        while node is not None:
+            num_list.append(node.val)
+            node = node.next
         return num_list
 
-    @staticmethod
-    def get_combined_num_from_list(num_list: list) -> int:
+    def get_num_from_list_by_multiplier(self, num_list: list) -> int:
         # ex: [2, 4, 3] -> ... -> 342
         combined_num = 0
         for i, num in enumerate(num_list):
-            combined_num += num * (10 ** i - 1)
+            combined_num += self.num_base_ten_multiplier(num, i - 1)
         return combined_num
+
+    @staticmethod
+    def num_base_ten_multiplier(num: int, exponent: int) -> int:
+        return num * (10 ** exponent)
 
     @staticmethod
     def get_reversed_linked_list_from_num(val: int) -> Optional[ListNode]:
@@ -93,20 +93,21 @@ class AddTwoNumbersSolution:
         return create_listnode_chain(*reversed_list)
 
     @staticmethod
-    def convert_chain_to_string(linked_list: Optional[ListNode]) -> str:
+    def convert_chain_to_string(node: Optional[ListNode]) -> str:
         string: str = ''
-        while linked_list is not None:
-            string += str(linked_list.val)
-            linked_list = linked_list.next
+        while node is not None:
+            string += str(node.val)
+            node = node.next
         return string
 
     @measure_performance_x_runs
     def initial_approach(self) -> Optional[ListNode]:
-        # Time: O(n)
+        # Time: O(n) -> O(18) for two linked lists of size 3
         # Space: O(n)
         """Process:
         1. Traverse the linked lists and convert the values into a list
-        2. Calculate the x digit reverse number from each list by ten to the power notation
+        2. Calculate the x digit reverse number from each list by
+        ten to the power notation
         3. Convert the sum back into a reversed linked list by
            3.1. converting the sum into a string
            3.2. traversing the string in reverse and appending it to a new list
@@ -114,18 +115,18 @@ class AddTwoNumbersSolution:
         """
         l1_vals: List[int] = self.get_linked_vals(self.l1)
         l2_vals: List[int] = self.get_linked_vals(self.l2)
-        l1_num: int = self.get_combined_num_from_list(l1_vals)
-        l2_num: int = self.get_combined_num_from_list(l2_vals)
+        l1_num: int = self.get_num_from_list_by_multiplier(l1_vals)
+        l2_num: int = self.get_num_from_list_by_multiplier(l2_vals)
 
         return self.get_reversed_linked_list_from_num(l1_num + l2_num)
 
     @measure_performance_x_runs
     def fast_approach(self) -> Optional[ListNode]:
-        # Time: O(n)
+        # Time: O(n) -> O(15) for two linked lists of 3
         # Space: O(n)
         """Process:
         1. Traverse the linked lists and convert the values into strings
-        2. Sum the reverse of each string converted into ints
+        2. Sum the reverse of each string (casted into ints)
         3. Convert the sum into a string, and create a linked list with the
         ints starting from the tail to the head
         """
