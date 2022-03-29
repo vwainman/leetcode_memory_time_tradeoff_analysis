@@ -27,6 +27,8 @@ class LongestPalindromeSolution:
                 self.odd_count += 1
 
     def longestPalindrome(self) -> int:
+        # Time: O(n)
+        # Space: O(n) (Best case O(n/2))
         self.save_char_frequencies()
         self.count_odds()
         if self.odd_count != 0:
