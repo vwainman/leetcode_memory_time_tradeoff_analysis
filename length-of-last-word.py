@@ -1,5 +1,3 @@
-# [58] Length of Last Word
-#
 # https://leetcode.com/problems/length-of-last-word/description/
 #
 # Given a string s consisting of some words separated by some number of spaces,

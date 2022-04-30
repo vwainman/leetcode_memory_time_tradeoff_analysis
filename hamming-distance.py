@@ -6,7 +6,7 @@
 # Given two integers x and y, return the Hamming distance between them.
 
 def hamming_distance(x: int, y: int) -> int:
-    # Time: O(max(n, m)) - n = len(x), m = len(y)
+    # Time: O(max(n, m)) where n = len(x), m = len(y)
     # Memory: O(n + m)
     x: str = str(bin(x))[2:]
     y: str = str(bin(y))[2:]

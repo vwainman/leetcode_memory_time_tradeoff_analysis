@@ -20,7 +20,7 @@ def contains_duplicate(nums: List[int]) -> bool:
     return False
 
 
-def contains_duplicate_efficient(nums: List[int]) -> bool:
+def contains_duplicate_memory_efficient(nums: List[int]) -> bool:
     # Time: O(n)
     # Memory: O(1) - modifying arg in-place
     original_len: int = len(nums)
@@ -34,4 +34,4 @@ if __name__ == "__main__":
              ([1, 1, 1, 3, 3, 4, 3, 2, 4, 2], True)]
     for input, output in cases:
         assert contains_duplicate(input) == output
-        assert contains_duplicate_efficient(input) == output
+        assert contains_duplicate_memory_efficient(input) == output
